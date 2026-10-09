@@ -1,26 +1,23 @@
 name: Crypto Watchlist Alerts
 
 on:
-workflow_dispatch:
-schedule:
-- cron: "*/15 * * * *"
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
 
 jobs:
-run-bot:
-runs-on: ubuntu-latest
-steps:
-- name: Get repository code
-uses: actions/checkout@v4
-
-  - name: Set up Python
-    uses: actions/setup-python@v5
-    with:
-      python-version: "3.11"
-
-  - name: Install dependencies
-    run: pip install requests
-
-  - name: Run crypto bot
-    env:
-      BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-    run: python Bot.py
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install requests
+        run: pip install requests
+      - name: Run bot
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        run: python Bot.py
